@@ -8,3 +8,10 @@ Ca évite d'avoir à ramener un élément de règle dans piece
 
 Argument pour la méthode spécifique :
 C'est plus joli qu'un enum 
+
+Je préfère la seconde mais je pense que la première est plus conforme.
+
+# 2
+Supprimer la position de la pièce dans piece ?
+Finalement, il est toujours possible de la récupérer, et cela fait moins
+de données dupliquées à garder à jour proprement...
