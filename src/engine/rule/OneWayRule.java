@@ -4,6 +4,10 @@ import engine.Board;
 import engine.Direction;
 import engine.piece.Piece;
 
+/**
+ * Représente les mouvements restreints à une direction,
+ * comme ceux des pions
+ */
 public abstract class OneWayRule extends Rule {
     protected Direction direction;
 

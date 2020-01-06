@@ -5,15 +5,18 @@ import engine.Move;
 import engine.Vector;
 import engine.piece.Piece;
 
-public class LinearRule extends StraightRule {
-    public LinearRule(Piece piece, Board board) {
+public abstract class StraightRule extends Rule {
+    private static Vector baseVector;
+
+    public StraightRule(Piece piece, Board board) {
         super(piece, board);
     }
 
     @Override
     public boolean check(Vector to) {
-        // TODO Auto-generated method stub
-        return false;
+        for (int direction = 0; direction < 4; ++direction) {
+            for (int )
+        }
     }
 
     @Override

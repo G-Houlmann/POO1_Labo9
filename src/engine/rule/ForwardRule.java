@@ -6,6 +6,12 @@ import engine.Move;
 import engine.Vector;
 import engine.piece.Piece;
 
+/**
+ * Représente un mouvement d'une case dans une direction donnée,
+ * comme le mouvement de base d'un pion.
+ * 
+ * La case de destination doit être libre.
+ */
 class ForwardRule extends OneWayRule {
     ForwardRule(Piece piece, Board board, Direction direction) {
         super(piece, board, direction);

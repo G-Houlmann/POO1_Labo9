@@ -18,10 +18,18 @@ public enum Direction {
     }
 
     /**
-     * @return un vecteur directeur correspondant à la 
+     * @return un vecteur directeur et unitaire correspondant à la 
      * direction
      */
     public Vector getDirectionVector() {
         return v;
+    }
+
+    /**
+     * @return Un vecteur normal et unitaire correspondant à la 
+     * direction
+     */
+    public Vector getNormalVector() {
+        return v.getNormalVector();
     }
 }

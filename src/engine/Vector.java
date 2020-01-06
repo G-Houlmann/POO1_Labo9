@@ -19,10 +19,51 @@ public class Vector {
     }
 
     /**
+     * Ajoute n fois un vecteur unitaire dans la direction donnée
+     * @param d Une direction
+     * @param n Un facteur
+     * @return Un nouveau vecteur
+     */
+    public Vector add(Direction d, int n) {
+        return add(d.getDirectionVector().multiply(n));
+    }
+
+    /**
      * @param that Un vecteur
      * @return L'addition des deux vecteurs
      */
     public Vector add(Vector that) {
         return new Vector(this.x + that.x, this.y + that.y);
+    }
+
+    /**
+     * Multiple un vecteur par un scalaire
+     * @param scalar Un nombre
+     * @return Un nouveau vecteur
+     */
+    public Vector multiply(int scalar) {
+        return new Vector(scalar * x, scalar * y);
+    }
+
+    /**
+     * @return Un vecteur normal
+     */
+    public Vector getNormalVector() {
+        return new Vector(y, -x);
+    }
+
+    /**
+     * @param that Un vecteur
+     * @return La distance de manhattan entre les deux vecteurs
+     */
+    public int manhattanDistance(Vector that) {
+        return Math.abs(this.x - that.x) + Math.abs(this.y - that.y);
+    }
+    
+    @Override
+    public boolean equals(Object that) {
+        return getClass() == that.getClass()
+            && this.x == ((Vector) that).x
+            && this.y == ((Vector) that).y;
     }
 }

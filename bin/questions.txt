@@ -1,0 +1,10 @@
+# 1
+Veut-il mieux faire un test sur le type de pièces ou créer des méthodes spécifiques 
+dans piece pour la prise en passant ou le rock ? (i.e. pour savoir quel type de pièces
+est autorisé à être utilisé dans ces mouvements)
+
+Argument pour le test sur le type de pièces :
+Ca évite d'avoir à ramener un élément de règle dans piece
+
+Argument pour la méthode spécifique :
+C'est plus joli qu'un enum 
