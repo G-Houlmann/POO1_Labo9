@@ -1,12 +1,27 @@
 package engine;
 
+import java.util.LinkedList;
+
 public class History {
+    private LinkedList<Move> moves;
+
+    public History() {
+        moves = new LinkedList<>();
+    }
+
     /**
      * @return true si l'historique est vide, false sinon
      */
     public boolean isEmpty() {
-        // TODO
-        return true;
+        return moves.isEmpty();
+    }
+
+    /**
+     * Ajoute un mouvement à l'historique
+     * @param m Un mouvement
+     */
+    public void add(Move m) {
+        moves.add(m);
     }
 
     /**
@@ -14,9 +29,9 @@ public class History {
      * @throws RuntimeException si l'historique est vide
      */
     public Move getLast() {
-        // TODO 
-        if (false)
+        if (isEmpty())
             throw new RuntimeException("Empty history");
-        return new Move();
+    
+        return moves.getLast();
     }
 }

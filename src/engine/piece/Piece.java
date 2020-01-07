@@ -1,6 +1,5 @@
 package engine.piece;
 
-import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
 import engine.Move;
@@ -10,23 +9,21 @@ import engine.rule.Rule;
 public abstract class Piece {
     private int firstMoveTurn;
     private PlayerColor color;
-    private PieceType type;
-    private Board board;
-    private final Rule[] rules;
+    private Board board; // Inutile ?
+    private Vector position;
+    protected Rule[] rules;
 
-    protected Piece(Board board, PlayerColor color, PieceType type, Rule[] rules) {
+    protected Piece(Board board, PlayerColor color, Vector position) {
         this.color = color;
-        this.type = type;
         this.board = board;
-        this.rules = rules;
+        this.position = position;
     }
 
     /**
      * @return La position de la pièce
      */
     public Vector getPosition() {
-        // TODO
-        return new Vector(0,0);
+        return position;
     }
 
     /**
@@ -53,14 +50,36 @@ public abstract class Piece {
     }
 
     /**
-     * @return Le type de la pièce
+     * Retourne un mouvement permettant d'atteindre la destination to.
+     * 
+     * Si la case n'est pas atteignable avec l'ensemble de règles de 
+     * la pièce, un mouvement invalide est retourné.
+     * @param to Case de destination
+     * @return Un mouvement
      */
-    public PieceType getType() {
-        return type;
+    public Move createMove(Vector to) {
+        for (Rule rule : rules) {
+            if (rule.check(to)) {
+                return rule.createMove(to);
+            }
+        }
+
+        return new Move();
     }
 
-    public Move createMove(Vector to) {
-        // TODO
-        return new Move();
+    /**
+     * @return true s'il est possible de prendre la pièce en passant,
+     * false sinon
+     */
+    public boolean canBeTakenEnPassant() {
+        return false;
+    }
+
+    /**
+     * @return true s'il est possible d'utiliser la pièce pour effectuer un roque',
+     * false sinon
+     */
+    public boolean canBeUsedtoCastle() {
+        return false;
     }
 }

@@ -59,6 +59,15 @@ public class Vector {
     }
 
     /**
+     * Ajoute un vecteur unitaire dans la direction donnée
+     * @param d Une direction
+     * @return Un nouveau vecteur
+     */
+    public Vector substract(Direction d) {
+        return substract(d.getDirectionVector());
+    }
+
+    /**
      * Multiple un vecteur par un scalaire
      * @param scalar Un nombre
      * @return Un nouveau vecteur
@@ -80,6 +89,13 @@ public class Vector {
      */
     public boolean isCollinear(Vector that) {
         return this.x * that.y == this.y * that.x;
+    }
+
+    /**
+     * @return Le carré de la norme du vecteur
+     */
+    public long squareNorm() {
+        return x * x + y * y;
     }
 
     @Override

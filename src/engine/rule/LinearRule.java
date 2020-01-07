@@ -5,7 +5,7 @@ import engine.Move;
 import engine.Vector;
 import engine.piece.Piece;
 
-public abstract class LinearRule extends Rule {
+public class LinearRule extends Rule {
     private final Vector direction;
     private final int range;
 
@@ -13,6 +13,10 @@ public abstract class LinearRule extends Rule {
         super(piece, board);
         this.direction = direction;
         this.range = range;
+    }
+
+    public LinearRule(Piece piece, Board board, Vector direction) {
+        this(piece, board, direction, Integer.MAX_VALUE);
     }
 
     /**

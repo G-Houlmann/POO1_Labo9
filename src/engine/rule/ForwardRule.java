@@ -12,8 +12,8 @@ import engine.piece.Piece;
  * 
  * La case de destination doit être libre.
  */
-class ForwardRule extends OneWayRule {
-    ForwardRule(Piece piece, Board board, Direction direction) {
+public class ForwardRule extends OneWayRule {
+    public ForwardRule(Piece piece, Board board, Direction direction) {
         super(piece, board, direction);
     }
 

@@ -1,9 +1,15 @@
 package engine;
 
+import java.util.LinkedList;
+
+import chess.PlayerColor;
+import engine.piece.King;
 import engine.piece.Piece;
 
 public class Board {
     private int turn;
+    private LinkedList<Piece> pieces;
+    private History history;
 
     /**
      * @param v Un vecteur
@@ -12,8 +18,7 @@ public class Board {
      *          plateau.
      */
     public boolean hasPieceAt(Vector v) {
-        // TODO
-        return true;
+        return getPieceAt(v) != null;
     }
 
     /**
@@ -22,8 +27,7 @@ public class Board {
      *          ne s'y trouve
      */
     public Piece getPieceAt(Vector v) {
-        // TODO
-        return new Piece() {};
+        return pieces.stream().filter(piece -> piece.getPosition().equals(v)).findAny().orElse(null);
     }
 
     /**
@@ -31,5 +35,40 @@ public class Board {
      */
     public int getTurn() {
         return turn;
+    }
+
+    /**
+     * @return L'historique des mouvements
+     */
+    public History getHistory() {
+        return history;
+    }
+
+    /**
+     * @param position Case à analyser
+     * @param color Une couleur
+     * @return true si la case est menacée par une pièce de couleur color,
+     *          false sinon
+     */
+    public boolean isAttacked(Vector position, PlayerColor color) {
+        for (Piece piece : pieces) {
+            if (piece.getColor() == color && piece.createMove(position).isValid()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param color Une couleur
+     * @return true si le roi de la couleur color est menacé, false sinon
+     */
+    public boolean isCheck(PlayerColor color) {
+        King k = (King) pieces.stream()
+            .filter(piece -> piece.getClass() == King.class && piece.getColor() == color)
+            .findAny().orElse(null);
+        return isAttacked(k.getPosition(), 
+            color == PlayerColor.WHITE ? PlayerColor.WHITE : PlayerColor.BLACK);
     }
 }
