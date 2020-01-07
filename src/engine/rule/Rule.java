@@ -5,7 +5,7 @@ import engine.Move;
 import engine.Vector;
 import engine.piece.Piece;
 
-abstract class Rule {
+public abstract class Rule {
     Piece piece;
     Board board;
 

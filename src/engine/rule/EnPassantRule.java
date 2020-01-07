@@ -27,7 +27,7 @@ public class EnPassantRule extends OneWayRule {
         return p.getType() == PieceType.PAWN
             && p.getColor() != piece.getColor()
             && p.getFirstMoveTurn() == board.getTurn() - 1
-            && position.manhattanDistance(history.getLast().getFrom()) == 2;
+            && position.add(direction.getDirectionVector().multiply(2)).equals(history.getLast().getFrom());
             
     }
 

@@ -2,12 +2,24 @@ package engine.piece;
 
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.Board;
+import engine.Move;
 import engine.Vector;
+import engine.rule.Rule;
 
 public abstract class Piece {
     private int firstMoveTurn;
     private PlayerColor color;
     private PieceType type;
+    private Board board;
+    private final Rule[] rules;
+
+    protected Piece(Board board, PlayerColor color, PieceType type, Rule[] rules) {
+        this.color = color;
+        this.type = type;
+        this.board = board;
+        this.rules = rules;
+    }
 
     /**
      * @return La position de la pièce
@@ -45,5 +57,10 @@ public abstract class Piece {
      */
     public PieceType getType() {
         return type;
+    }
+
+    public Move createMove(Vector to) {
+        // TODO
+        return new Move();
     }
 }
