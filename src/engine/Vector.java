@@ -10,6 +10,20 @@ public class Vector {
     }
 
     /**
+     * @return x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @return y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
      * Ajoute un vecteur unitaire dans la direction donnée
      * @param d Une direction
      * @return Un nouveau vecteur
@@ -37,6 +51,23 @@ public class Vector {
     }
 
     /**
+     * @param that Un vecteur
+     * @return La soustraction des deux vecteurs
+     */
+    public Vector substract(Vector that) {
+        return new Vector(this.x - that.x, this.y - that.y);
+    }
+
+    /**
+     * Ajoute un vecteur unitaire dans la direction donnée
+     * @param d Une direction
+     * @return Un nouveau vecteur
+     */
+    public Vector substract(Direction d) {
+        return substract(d.getDirectionVector());
+    }
+
+    /**
      * Multiple un vecteur par un scalaire
      * @param scalar Un nombre
      * @return Un nouveau vecteur
@@ -54,12 +85,19 @@ public class Vector {
 
     /**
      * @param that Un vecteur
-     * @return La distance de manhattan entre les deux vecteurs
+     * @return true si les vecteurs sont colinéaires, false sinon
      */
-    public int manhattanDistance(Vector that) {
-        return Math.abs(this.x - that.x) + Math.abs(this.y - that.y);
+    public boolean isCollinear(Vector that) {
+        return this.x * that.y == this.y * that.x;
     }
-    
+
+    /**
+     * @return Le carré de la norme du vecteur
+     */
+    public long squareNorm() {
+        return x * x + y * y;
+    }
+
     @Override
     public boolean equals(Object that) {
         return getClass() == that.getClass()

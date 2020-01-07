@@ -1,19 +1,14 @@
 package engine.rule;
 
-import chess.PieceType;
 import engine.Board;
 import engine.Direction;
-import engine.History;
 import engine.Move;
 import engine.Vector;
 import engine.piece.Piece;
 
 public class EnPassantRule extends OneWayRule {
-    private History history;
-
-    public EnPassantRule(Piece piece, Board board, Direction direction, History history) {
+    public EnPassantRule(Piece piece, Board board, Direction direction) {
         super(piece, board, direction);
-        this.history = history;
     }
 
     /**
@@ -24,11 +19,11 @@ public class EnPassantRule extends OneWayRule {
      */
     private boolean checkEnPassantOnPiece(Vector position) {
         Piece p = board.getPieceAt(position);
-        return p.getType() == PieceType.PAWN
+        return p.canBeTakenEnPassant()
             && p.getColor() != piece.getColor()
             && p.getFirstMoveTurn() == board.getTurn() - 1
-            && position.manhattanDistance(history.getLast().getFrom()) == 2;
-            
+            && position.add(direction.getDirectionVector().multiply(2))
+                .equals(board.getHistory().getLast().getFrom());
     }
 
     @Override
