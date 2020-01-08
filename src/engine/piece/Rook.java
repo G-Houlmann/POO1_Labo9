@@ -1,5 +1,6 @@
 package engine.piece;
 
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
 import engine.Vector;
@@ -7,7 +8,7 @@ import engine.rule.LinearRule;
 import engine.rule.Rule;
 
 public class Rook extends Piece {
-    Rook(Board board, PlayerColor color, Vector position) {
+    public Rook(Board board, PlayerColor color, Vector position) {
         super(board, color, position);
         rules = new Rule[] {
             new LinearRule(this, board, new Vector(0, 1)),
@@ -18,5 +19,9 @@ public class Rook extends Piece {
     @Override
     public boolean canBeUsedtoCastle() {
         return true;
+    }
+
+    public PieceType getPieceType(){
+        return PieceType.ROOK;
     }
 }

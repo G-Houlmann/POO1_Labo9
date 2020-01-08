@@ -1,5 +1,6 @@
 package engine.piece;
 
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
 import engine.Direction;
@@ -23,5 +24,9 @@ public class Pawn extends Piece {
     @Override
     public boolean canBeTakenEnPassant() {
         return true;
+    }
+
+    public PieceType getPieceType(){
+        return PieceType.PAWN;
     }
 }

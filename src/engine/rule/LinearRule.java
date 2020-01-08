@@ -58,7 +58,8 @@ public class LinearRule extends Rule {
             // Si une case sur le chemin est occupée
             // ou si la case de destination est occupée par une pièce de même couleur
             if ((i < distance && board.hasPieceAt(position))
-            || (board.hasPieceAt(position) && board.getPieceAt(position).getColor() == piece.getColor())) {
+            || (board.hasPieceAt(position) && 
+            board.getPieceAt(position).getColor() == piece.getColor())) {
                 return false;
             }
         }
@@ -68,7 +69,6 @@ public class LinearRule extends Rule {
 
     @Override
     public Move createMove(Vector to) {
-        // TODO Auto-generated method stub
-        return null;
+        return new Move(piece.getPosition(), to, piece);
     }
 }

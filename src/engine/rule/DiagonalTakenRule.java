@@ -39,7 +39,6 @@ public class DiagonalTakenRule extends OneWayRule {
 
     @Override
     public Move createMove(Vector to) {
-        // TODO Auto-generated method stub
-        return null;
+        return new Move(piece.getPosition(), to, piece);
     }
 }

@@ -11,6 +11,28 @@ public class Board {
     private LinkedList<Piece> pieces;
     private History history;
 
+
+    public Board(){
+        pieces = new LinkedList<Piece>();
+        turn = 0;
+    }
+
+    
+    /** 
+     * Ajoute une pièce au board
+     * @param piece La pièce à ajouter
+     */
+    public void addPiece(Piece piece){
+        pieces.add(piece);
+    }
+
+    /** 
+     * Incrémente le compteur de tours
+     */
+    public void nextTurn(){
+        turn++;
+    }
+
     /**
      * @param v Un vecteur
      * @return true si une pièce se trouve à l'emplacement indiqué,
@@ -27,7 +49,14 @@ public class Board {
      *          ne s'y trouve
      */
     public Piece getPieceAt(Vector v) {
-        return pieces.stream().filter(piece -> piece.getPosition().equals(v)).findAny().orElse(null);
+        return pieces.stream().filter((piece) -> piece.getPosition().equals(v)).findAny().orElse(null);
+    }
+
+    /**
+     * @param piece La pièce à supprimer de la liste
+     */
+    public void removePiece(Piece piece){
+        pieces.remove(piece);
     }
 
     /**
@@ -69,6 +98,7 @@ public class Board {
             .filter(piece -> piece.getClass() == King.class && piece.getColor() == color)
             .findAny().orElse(null);
         return isAttacked(k.getPosition(), 
-            color == PlayerColor.WHITE ? PlayerColor.WHITE : PlayerColor.BLACK);
+                color == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE);
+            
     }
 }

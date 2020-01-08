@@ -1,5 +1,6 @@
 package engine.piece;
 
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
 import engine.Move;
@@ -9,7 +10,7 @@ import engine.rule.Rule;
 public abstract class Piece {
     private int firstMoveTurn;
     private PlayerColor color;
-    private Board board; // Inutile ?
+    private Board board;
     private Vector position;
     protected Rule[] rules;
 
@@ -19,11 +20,29 @@ public abstract class Piece {
         this.position = position;
     }
 
+    
+    /** 
+     * @return Le type de la pièce
+     */
+    public abstract PieceType getPieceType();
+
     /**
      * @return La position de la pièce
      */
     public Vector getPosition() {
         return position;
+    }
+
+
+    
+    /** 
+     * Déplace la pièce
+     * @param newPos Nouvelle position de la pièce sur le board
+     * @param turn Tour actuel de jeu
+     */
+    public void move(Vector newPos, int turn){
+        this.position = newPos;
+        this.firstMoveTurn = turn;
     }
 
     /**
@@ -39,6 +58,13 @@ public abstract class Piece {
      */
     public PlayerColor getColor() {
         return color;
+    }
+
+    /**
+     * @return Le board sur lequel est la pièce
+     */
+    public Board getBoard(){
+        return board;
     }
 
     /**
