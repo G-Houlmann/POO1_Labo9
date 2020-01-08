@@ -11,22 +11,9 @@ import engine.util.Vector;
  * 
  * Le mouvement doit s'effectuer dans une direction donnée.
  */
-public class DiagonalTakenRule extends OneWayRule {
+public class DiagonalTakenRule extends DiagonalRule {
     public DiagonalTakenRule(Piece piece, Board board, Direction direction) {
         super(piece, board, direction);
-    }
-
-    /**
-     * Vérifie que la position de destination est accessible
-     * @param to Un vecteur
-     * @return true/false
-     */
-    private boolean checkPosition(Vector to) {
-        Vector normal = direction.getNormalVector();
-        Vector base = piece.getPosition().add(direction);
-
-        return base.add(normal).equals(to)
-            || base.add(normal.multiply(-1)).equals(to);
     }
 
     @Override
