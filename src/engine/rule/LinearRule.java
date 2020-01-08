@@ -36,7 +36,11 @@ public class LinearRule extends Rule {
         Vector fromTo = to.substract(piece.getPosition());
 
         if (direction.isCollinear(fromTo)) {
-            distance = (double) fromTo.getX() / (double) direction.getX();
+            if (direction.getX() == 0) {
+                distance = (double) fromTo.getY() / (double) direction.getY();
+            } else {
+                distance = (double) fromTo.getX() / (double) direction.getX();
+            }
             distance = distance == (int) distance ? distance : 0;
         }
 

@@ -15,6 +15,8 @@ public class King extends Piece {
         rules = new Rule[] {
             new LinearRule(this, board, new Vector(0, 1), 1),
             new LinearRule(this, board, new Vector(1, 0), 1),
+            new LinearRule(this, board, new Vector(1, 1), 1),
+            new LinearRule(this, board, new Vector(1, -1), 1),
             new CastlingRule(this, board, Direction.RIGHT, new Vector(3, 0)),
             new CastlingRule(this, board, Direction.LEFT, new Vector(-4, 0))
         };

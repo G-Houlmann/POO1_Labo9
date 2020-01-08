@@ -76,10 +76,11 @@ public class Board {
     /**
      * @param position Case à analyser
      * @param color Une couleur
-     * @return true si la case est menacée par une pièce de couleur color,
-     *          false sinon
+     * @return true si une pièce de la couleur color peut être menacée dans la case
+     *          position, false sinon
      */
     public boolean isAttacked(Vector position, PlayerColor color) {
+        color = color == PlayerColor.BLACK ? PlayerColor.WHITE : PlayerColor.BLACK;
         for (Piece piece : pieces) {
             if (piece.getColor() == color && piece.createMove(position).isValid()) {
                 return true;
@@ -97,8 +98,7 @@ public class Board {
         King k = (King) pieces.stream()
             .filter(piece -> piece.getClass() == King.class && piece.getColor() == color)
             .findAny().orElse(null);
-        return isAttacked(k.getPosition(), 
-                color == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE);
+        return isAttacked(k.getPosition(), color);
             
     }
 }
