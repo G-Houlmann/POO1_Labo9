@@ -2,6 +2,7 @@ package engine.rule;
 
 import engine.Board;
 import engine.move.Move;
+import engine.move.PromotionMove;
 import engine.piece.Piece;
 import engine.util.Direction;
 import engine.util.Vector;
@@ -13,7 +14,9 @@ import engine.util.Vector;
  * La case de destination doit être libre.
  */
 public class ForwardRule extends OneWayRule {
-    public ForwardRule(Piece piece, Board board, Direction direction) {
+    private int promotionYValue;
+
+    public ForwardRule(Piece piece, Board board, Direction direction, int promotionYValue) {
         super(piece, board, direction);
     }
 
@@ -25,7 +28,10 @@ public class ForwardRule extends OneWayRule {
 
     @Override
     public Move createMove(Vector to) {
-        // TODO Promotion
-        return super.createMove(to);
+        if (piece.getPosition().getY() == promotionYValue) {
+            return new PromotionMove(piece.getPosition(), to, piece);
+        } else {
+            return super.createMove(to);
+        }
     }
 }

@@ -44,6 +44,12 @@ public class Move {
         return from;
     }
 
+    /**
+     * @return La case d'arrivée du mouvement
+     */
+    public Vector getTo() {
+        return to;
+    }
     
     /** 
      * @return True si le mouvement est légal, c'est-à-dire qu'il est 

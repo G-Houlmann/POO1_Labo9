@@ -23,6 +23,13 @@ public class CastlingRule extends Rule {
         Vector destination = direction.getDirectionVector().multiply(2);
         Vector absoluteSecondPiecePosition = piece.getPosition().add(secondPiecePosition);
         
+        /* Conditions de base :
+         * - La case sur laquelle souhaite se rendre la pièce est bien une case où l'on peut roquer
+         * - La pièce n'a pas encore bougé
+         * - Une seconde pièce se trouve en position adéquate pour effectuer le roque
+         * - Cette pièce est utilisable pour roquer
+         * - Cette pièce n'a pas encore bougé
+         */
         if (!destination.equals(to.substract(piece.getPosition()))
         || piece.hasMoved()
         || !board.hasPieceAt(absoluteSecondPiecePosition)
@@ -31,6 +38,7 @@ public class CastlingRule extends Rule {
             return false;
         }
 
+        // Vérifie que les cases sur le trajet sont vide et non attaquées
         Vector v = piece.getPosition().add(direction);
         while (v.substract(piece.getPosition()).squareNorm() < secondPiecePosition.squareNorm()) {
             if (board.hasPieceAt(v) 

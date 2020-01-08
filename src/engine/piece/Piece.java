@@ -1,5 +1,6 @@
 package engine.piece;
 
+import chess.ChessView;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
@@ -7,14 +8,14 @@ import engine.move.Move;
 import engine.rule.Rule;
 import engine.util.Vector;
 
-public abstract class Piece {
+public abstract class Piece implements ChessView.UserChoice {
     private int firstMoveTurn;
     private PlayerColor color;
     private Board board;
     private Vector position;
     protected Rule[] rules;
 
-    protected Piece(Board board, PlayerColor color, Vector position) {
+    public Piece(Board board, PlayerColor color, Vector position) {
         this.color = color;
         this.board = board;
         this.position = position;
@@ -115,5 +116,10 @@ public abstract class Piece {
      */
     public void removeFromBoard() {
         board.removePiece(this);
+    }
+
+    @Override
+    public String textValue() {
+        return getClass().getName();
     }
 }
