@@ -124,8 +124,8 @@ public class Chess implements ChessController {
         Piece p = board.getPieceAt(from);
         Move mv = p.createMove(to);
 
-        if(mv.isLegal()){
-            mv.apply();
+        if(mv.apply()){
+            mv.apply(view);
             board.addToHistory(mv);
             board.nextTurn();
             return true;

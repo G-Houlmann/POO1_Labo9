@@ -50,11 +50,8 @@ public class Move {
      *          valide (la case visée est atteignable) et qu'il ne cause pas 
      *          d'échecs à sa propre couleur. False sinon.
      */
-    public Boolean isLegal(){
-        if(validity && !(piece.getBoard().isCheck(piece.getColor()))){
-            return true;
-        }
-        return false;
+    public Boolean createsAllyCheck(){
+        return piece.getBoard().isCheck(piece.getColor());
     }
 
     
@@ -80,14 +77,28 @@ public class Move {
 
     
     /** 
-     * Applique le mouvement et ses conséquences (passage au tour suivant, 
-     * destruction de l'éventuelle pièce prise...)
+     * Applique le mouvement, vérifie si il crée un échec allié. Si c'est le cas,
+     * Applique le mouvement inverse pour annuler les changements.
+     * @return True si le mouvement s'est appliqué sans problème, false si il a
+     * du être annulé.
      */
-    public void apply(){
-        if (taken.isPresent()) {
-            taken.get().removeFromBoard();
+    public Boolean apply(){
+        /*if (taken.isPresent()) {
+            taken.get().removeFromBoard(); //TODO prise
+        }*/
+        if(validity){
+            piece.move(to);
+            if(createsAllyCheck()){
+                Move reversed = this.reverse();
+                reversed.apply();
+                return false;
+            }
+            return true;
         }
-        piece.move(to);
+        else{
+            return false;
+        }
+        
     }
 
     /**
@@ -95,6 +106,7 @@ public class Move {
      * @param view
      */
     public void apply(ChessView view) {
-        // TODO
+        view.removePiece(from.getX(), from.getY());
+        view.putPiece(piece.getPieceType(), piece.getColor(), to.getX(), to.getY());
     }
 }

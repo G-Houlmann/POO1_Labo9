@@ -12,9 +12,9 @@ public class CastlingMove extends Move {
     }
 
     @Override
-    public void apply() {
-        super.apply();
-        secondPieceMove.apply();
+    public Boolean apply() {
+        Boolean kingMoveLegal = super.apply();
+        return kingMoveLegal && secondPieceMove.apply();
     }
 
     @Override
