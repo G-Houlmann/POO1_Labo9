@@ -74,10 +74,10 @@ public class Move {
      * @return Le mouvement inverse au présent mouvement
      */
     public void reverse(){
-        //TODO gérer la prise
-        Vector tmp = from;
-        from = to;
-        to = tmp;
+        piece.move(from);
+        if(taken.isPresent()){
+            piece.getBoard().addPiece(taken.get());
+        }
     }
 
     

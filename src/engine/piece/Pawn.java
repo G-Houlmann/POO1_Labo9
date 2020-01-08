@@ -12,10 +12,11 @@ import engine.util.Direction;
 import engine.util.Vector;
 
 public class Pawn extends Piece {
-    public Pawn(Board board, PlayerColor color, Vector position, Direction direction) {
+
+    public Pawn(Board board, PlayerColor color, Vector position, Direction direction, int promotionYValue) {
         super(board, color, position);
         rules = new Rule[] {
-            new ForwardRule(this, board, direction),
+            new ForwardRule(this, board, direction, promotionYValue),
             new DoubleForwardRule(this, board, direction),
             new EnPassantRule(this, board, direction),
             new DiagonalTakenRule(this, board, direction)};

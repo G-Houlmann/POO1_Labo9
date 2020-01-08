@@ -28,15 +28,69 @@ public class Chess implements ChessController {
     private ChessView view;
     private Board board;
     
-
+    private PlayerColor currentPlayer;
+    private boolean check;
 
     @Override
     public void newGame() {
-        // TODO Auto-generated method stub
         fillBoard(view);
+        currentPlayer = PlayerColor.WHITE;
+        check = false;
     }
 
     
+    /** 
+     * démarre le jeu
+     * @param view Vue utilisée pour l'exécution du jeu
+     */
+    @Override
+    public void start(ChessView view) {
+        view.startView();
+        this.view = view;
+        newGame();
+    }
+    
+    /** 
+     * Exécute, s'il est légal, un mouvement d'une case à une autre sur le plateau affiché 
+     * @param fromX Coordonnée X de départ
+     * @param fromY Coordonnée Y de départ
+     * @param toX Coordonnée X de destination
+     * @param toY Coordonnée Y de destination
+     * @return True si l'application du mouvement s'est passée sans problème, false sinon.
+     */
+    @Override
+    public boolean move(int fromX, int fromY, int toX, int toY) {
+        Vector from = new Vector(fromX, fromY);
+        Vector to = new Vector(toX, toY);
+
+        if (!board.hasPieceAt(from)) {
+            return false;
+        }
+
+        Piece p = board.getPieceAt(from);
+        Move mv = p.createMove(to);
+
+        if(mv.isValid() && mv.getPiece().getColor() == currentPlayer){
+            mv.apply();
+            if(board.isCheck(mv.getPiece().getColor())){//Le mouvement doit être annulé
+                mv.reverse();
+            } else{
+                nextTurn();
+                board.addToHistory(mv);
+                mv.apply(view);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void nextTurn(){
+        board.nextTurn();
+        currentPlayer = currentPlayer == 
+        PlayerColor.WHITE? PlayerColor.BLACK : PlayerColor.WHITE;
+    }
+
+
     /** 
      * Remplit le plateau de jeu d'un joueur sur la vue ainsi que dans l'objet board
      * @param color Couleur des pièces du joueur
@@ -44,12 +98,12 @@ public class Chess implements ChessController {
      * @param piecesRow Ligne sur laquelle seront placées les autres pièces
      * @param direction Direction dans laquelle les pions du joueur pourront avancer
      */
-    private void putSet(PlayerColor color, int pawnsRow, int piecesRow, Direction direction){
+    private void putSet(PlayerColor color, int pawnsRow, int piecesRow, Direction direction, int promotionRow){
 
         //crée les pions
         for(int i = 0; i < GRID_SIZE; ++i){
             view.putPiece(PieceType.PAWN, color, i, pawnsRow);
-            board.addPiece(new Pawn(board, color, new Vector(i, pawnsRow), direction));
+            board.addPiece(new Pawn(board, color, new Vector(i, pawnsRow), direction, promotionRow));
         }
 
         //crée les tours
@@ -87,57 +141,7 @@ public class Chess implements ChessController {
      */
     private void fillBoard(ChessView view){
         board = new Board();
-        putSet(PlayerColor.WHITE, PAWN_HEIGHT, 0, Direction.UP);
-        putSet(PlayerColor.BLACK, GRID_SIZE - 1 - PAWN_HEIGHT, GRID_SIZE-1, Direction.DOWN);
+        putSet(PlayerColor.WHITE, PAWN_HEIGHT, 0, Direction.UP, GRID_SIZE - 1);
+        putSet(PlayerColor.BLACK, GRID_SIZE - 1 - PAWN_HEIGHT, GRID_SIZE-1, Direction.DOWN, 0);
     }
-
-    
-    /** 
-     * démarre le jeu
-     * @param view Vue utilisée pour l'exécution du jeu
-     */
-    @Override
-    public void start(ChessView view) {
-        view.startView();
-        this.view = view;
-        newGame();
-    }
-    
-    /** 
-     * Exécute, s'il est légal, un mouvement d'une case à une autre sur le plateau affiché 
-     * @param fromX Coordonnée X de départ
-     * @param fromY Coordonnée Y de départ
-     * @param toX Coordonnée X de destination
-     * @param toY Coordonnée Y de destination
-     * @return True si l'application du mouvement s'est passée sans problème, false sinon.
-     */
-    @Override
-    public boolean move(int fromX, int fromY, int toX, int toY) {
-        // TODO Auto-generated method stub
-        Vector from = new Vector(fromX, fromY);
-        Vector to = new Vector(toX, toY);
-
-        if (!board.hasPieceAt(from)) {
-            return false;
-        }
-
-        Piece p = board.getPieceAt(from);
-        Move mv = p.createMove(to);
-
-        if(mv.isValid()){
-            mv.apply();
-            if(board.isCheck(mv.getPiece().getColor())){//Le mouvement doit être annulé
-                mv.reverse();
-                mv.apply();
-            } else{
-                board.nextTurn();
-                board.addToHistory(mv);
-                mv.apply(view);
-                return true;
-            }
-        }
-        return false;
-        
-    }
-
 }
