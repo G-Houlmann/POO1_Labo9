@@ -29,13 +29,11 @@ public class Chess implements ChessController {
     private Board board;
     
     private PlayerColor currentPlayer;
-    private boolean check;
 
     @Override
     public void newGame() {
         fillBoard(view);
         currentPlayer = PlayerColor.WHITE;
-        check = false;
     }
 
     
@@ -78,10 +76,19 @@ public class Chess implements ChessController {
                 nextTurn();
                 board.addToHistory(mv);
                 mv.apply(view);
+                displayCheck(mv.getPiece().getColor());
                 return true;
             }
         }
+
         return false;
+    }
+
+    private void displayCheck(PlayerColor color) {
+        color = color == PlayerColor.BLACK ? PlayerColor.WHITE : PlayerColor.BLACK;
+        if (board.isCheck(color)) {
+            view.displayMessage("Check!");
+        }
     }
 
     private void nextTurn(){

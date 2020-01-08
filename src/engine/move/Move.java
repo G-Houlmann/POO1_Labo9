@@ -101,6 +101,9 @@ public class Move {
      * @param view
      */
     public void apply(ChessView view) {
+        if (taken.isPresent()) {
+            view.removePiece(taken.get().getPosition().getX(), taken.get().getPosition().getY());
+        }
         view.removePiece(from.getX(), from.getY());
         view.putPiece(piece.getPieceType(), piece.getColor(), to.getX(), to.getY());
     }
