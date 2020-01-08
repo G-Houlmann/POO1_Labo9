@@ -1,5 +1,6 @@
 package engine.move;
 
+import chess.ChessView;
 import engine.piece.Piece;
 import engine.util.Vector;
 
@@ -18,8 +19,14 @@ public class CastlingMove extends Move {
     }
 
     @Override
-    public Move reverse() {
+    public void apply(ChessView view) {
+        secondPieceMove.apply(view);
+        super.apply(view);
+    }
+
+    @Override
+    public void reverse() {
         secondPieceMove.reverse();
-        return super.reverse();
+        super.reverse();
     }
 }

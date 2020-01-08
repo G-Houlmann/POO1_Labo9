@@ -124,14 +124,20 @@ public class Chess implements ChessController {
         Piece p = board.getPieceAt(from);
         Move mv = p.createMove(to);
 
-        if(mv.apply()){
-            mv.apply(view);
-            board.addToHistory(mv);
-            board.nextTurn();
-            return true;
+        if(mv.isValid()){
+            mv.apply();
+            if(board.isCheck(mv.getPiece().getColor())){//Le mouvement doit être annulé
+                mv.reverse();
+                mv.apply();
+            } else{
+                board.nextTurn();
+                board.addToHistory(mv);
+                mv.apply(view);
+                return true;
+            }
         }
-        
         return false;
+        
     }
 
 }

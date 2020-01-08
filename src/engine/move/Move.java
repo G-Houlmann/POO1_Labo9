@@ -67,12 +67,11 @@ public class Move {
     /** 
      * @return Le mouvement inverse au présent mouvement
      */
-    public Move reverse(){
+    public void reverse(){
         //TODO gérer la prise
         Vector tmp = from;
         from = to;
         to = tmp;
-        return this;
     }
 
     
@@ -83,22 +82,12 @@ public class Move {
      * du être annulé.
      */
     public Boolean apply(){
-        /*if (taken.isPresent()) {
+        if (taken.isPresent()) {
             taken.get().removeFromBoard(); //TODO prise
-        }*/
-        if(validity){
-            piece.move(to);
-            if(createsAllyCheck()){
-                Move reversed = this.reverse();
-                reversed.apply();
-                return false;
-            }
-            return true;
         }
-        else{
-            return false;
-        }
+        piece.move(to);
         
+        return true;
     }
 
     /**
