@@ -18,6 +18,7 @@ public class ForwardRule extends OneWayRule {
 
     public ForwardRule(Piece piece, Board board, Direction direction, int promotionYValue) {
         super(piece, board, direction);
+        this.promotionYValue = promotionYValue;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class ForwardRule extends OneWayRule {
 
     @Override
     public Move createMove(Vector to) {
-        if (piece.getPosition().getY() == promotionYValue) {
+        if (to.getY() == promotionYValue) {
             return new PromotionMove(piece.getPosition(), to, piece);
         } else {
             return super.createMove(to);

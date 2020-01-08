@@ -69,6 +69,10 @@ public abstract class Piece implements ChessView.UserChoice {
         return board;
     }
 
+    public String toString(){
+        return textValue();
+    }
+
     /**
      * @return Le numéro du tour au premier mouvement, 0 si
      * la pièce n'a pas encore bougé.
@@ -120,6 +124,6 @@ public abstract class Piece implements ChessView.UserChoice {
 
     @Override
     public String textValue() {
-        return getClass().getName();
+        return getClass().getSimpleName();
     }
 }
