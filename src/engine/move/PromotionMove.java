@@ -18,7 +18,7 @@ public class PromotionMove extends Move {
     public void apply(ChessView view) {
         Piece p = null;
         while(p == null)
-            p = view.askUser("Promotion !", "Choisir une nouvelle pièce :",
+            p = view.askUser("Promotion !", "Choose a new piece:",
                 (Piece) new Knight(getPiece().getBoard(), getPiece().getColor(), getTo()),
                 (Piece) new Rook(getPiece().getBoard(), getPiece().getColor(), getTo()),
                 (Piece) new Bishop(getPiece().getBoard(), getPiece().getColor(), getTo()),
