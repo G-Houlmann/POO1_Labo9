@@ -1,9 +1,8 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Move;
-import engine.Vector;
 import engine.piece.Piece;
+import engine.util.Vector;
 
 public class LinearRule extends Rule {
     private final Vector direction;
@@ -69,10 +68,5 @@ public class LinearRule extends Rule {
         }
 
         return true;
-    }
-
-    @Override
-    public Move createMove(Vector to) {
-        return new Move(piece.getPosition(), to, piece);
     }
 }

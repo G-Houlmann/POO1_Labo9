@@ -3,8 +3,10 @@ package engine;
 import java.util.LinkedList;
 
 import chess.PlayerColor;
+import engine.move.Move;
 import engine.piece.King;
 import engine.piece.Piece;
+import engine.util.Vector;
 
 public class Board {
     private int turn;
@@ -14,7 +16,8 @@ public class Board {
 
     public Board(){
         pieces = new LinkedList<Piece>();
-        turn = 0;
+        history = new History();
+        turn = 1;
     }
 
     
@@ -64,6 +67,14 @@ public class Board {
      */
     public int getTurn() {
         return turn;
+    }
+
+    /**
+     * Ajoute un mouvement à l'historique
+     * @param move Un mouvement
+     */
+    public void addToHistory(Move move) {
+        history.add(move);
     }
 
     /**

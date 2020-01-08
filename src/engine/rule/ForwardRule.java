@@ -1,10 +1,10 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Direction;
-import engine.Move;
-import engine.Vector;
+import engine.move.Move;
 import engine.piece.Piece;
+import engine.util.Direction;
+import engine.util.Vector;
 
 /**
  * Représente un mouvement d'une case dans une direction donnée,
@@ -25,6 +25,7 @@ public class ForwardRule extends OneWayRule {
 
     @Override
     public Move createMove(Vector to) {
-        return new Move(piece.getPosition(), to, piece);
+        // TODO Promotion
+        return super.createMove(to);
     }
 }

@@ -1,6 +1,7 @@
-package engine;
+package engine.move;
 
 import engine.piece.Piece;
+import engine.util.Vector;
 
 public class PromotionMove extends Move {
     private Piece newPiece;

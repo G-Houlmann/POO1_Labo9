@@ -1,9 +1,9 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Move;
-import engine.Vector;
+import engine.move.Move;
 import engine.piece.Piece;
+import engine.util.Vector;
 
 public abstract class Rule {
     Piece piece;
@@ -28,5 +28,10 @@ public abstract class Rule {
      *          (il est donc vivement conseillé d'appeler check au préalable)
      * @return Un mouvement
      */
-    public abstract Move createMove(Vector to);
+    public Move createMove(Vector to) {
+        if (board.hasPieceAt(to)) 
+            return new Move(piece.getPosition(), to, piece, board.getPieceAt(to));
+        else
+            return new Move(piece.getPosition(), to, piece);
+    }
 }

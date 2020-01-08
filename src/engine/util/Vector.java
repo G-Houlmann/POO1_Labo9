@@ -1,4 +1,4 @@
-package engine;
+package engine.util;
 
 public class Vector {
     private int x;

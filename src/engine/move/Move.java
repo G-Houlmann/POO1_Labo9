@@ -1,9 +1,10 @@
-package engine;
+package engine.move;
 
 import java.util.Optional;
 
-import chess.ChessController;
+import chess.ChessView;
 import engine.piece.Piece;
+import engine.util.Vector;
 
 public class Move {
     private Vector from;
@@ -17,10 +18,15 @@ public class Move {
     }
 
     public Move(Vector from, Vector to, Piece piece){
+        this(from, to, piece, null);
+    }
+
+    public Move(Vector from, Vector to, Piece piece, Piece taken) {
         this.from = from;
         this.to = to;
         this.piece = piece;
         this.validity = true;
+        this.taken = Optional.ofNullable(taken);
     }
 
     
@@ -66,19 +72,29 @@ public class Move {
      */
     public Move reverse(){
         //TODO gérer la prise
-        return new Move(to, from, piece);
+        Vector tmp = from;
+        from = to;
+        to = tmp;
+        return this;
     }
 
     
     /** 
      * Applique le mouvement et ses conséquences (passage au tour suivant, 
      * destruction de l'éventuelle pièce prise...)
-     * @param turn Le tour de jeu actuel
      */
-    public void apply(int turn){
-        /*if(taken.isPresent()){
-            piece.getBoard().removePiece(taken.get());
-        }*/ //TODO gérer la prise
-        piece.move(to, turn);
+    public void apply(){
+        if (taken.isPresent()) {
+            taken.get().removeFromBoard();
+        }
+        piece.move(to);
+    }
+
+    /**
+     * Applique un mouvement à une vue
+     * @param view
+     */
+    public void apply(ChessView view) {
+        // TODO
     }
 }

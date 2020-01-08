@@ -3,9 +3,9 @@ package engine.piece;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
-import engine.Move;
-import engine.Vector;
+import engine.move.Move;
 import engine.rule.Rule;
+import engine.util.Vector;
 
 public abstract class Piece {
     private int firstMoveTurn;
@@ -20,7 +20,6 @@ public abstract class Piece {
         this.position = position;
     }
 
-    
     /** 
      * @return Le type de la pièce
      */
@@ -33,16 +32,18 @@ public abstract class Piece {
         return position;
     }
 
-
-    
     /** 
      * Déplace la pièce
      * @param newPos Nouvelle position de la pièce sur le board
-     * @param turn Tour actuel de jeu
      */
-    public void move(Vector newPos, int turn){
-        this.position = newPos;
-        this.firstMoveTurn = turn;
+    public void move(Vector newPos){
+        position = newPos;
+        // Retour à une position antérieure
+        if (board.getTurn() <= firstMoveTurn) {
+            firstMoveTurn = 0;
+        } else if(!hasMoved()) {
+            this.firstMoveTurn = board.getTurn();
+        }
     }
 
     /**
@@ -107,5 +108,12 @@ public abstract class Piece {
      */
     public boolean canBeUsedtoCastle() {
         return false;
+    }
+
+    /**
+     * Supprime la pièce du plateau auquel elle est associée
+     */
+    public void removeFromBoard() {
+        board.removePiece(this);
     }
 }

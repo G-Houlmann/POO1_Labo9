@@ -1,4 +1,4 @@
-package engine;
+package engine.util;
 
 /**
  * Symbolise une direction dans un système d'axes classique,

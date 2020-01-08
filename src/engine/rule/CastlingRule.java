@@ -1,10 +1,11 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Direction;
-import engine.Move;
-import engine.Vector;
+import engine.move.CastlingMove;
+import engine.move.Move;
 import engine.piece.Piece;
+import engine.util.Direction;
+import engine.util.Vector;
 
 public class CastlingRule extends Rule {
     private final Direction direction;
@@ -27,7 +28,6 @@ public class CastlingRule extends Rule {
         || !board.hasPieceAt(absoluteSecondPiecePosition)
         || !board.getPieceAt(absoluteSecondPiecePosition).canBeUsedtoCastle()
         || board.getPieceAt(absoluteSecondPiecePosition).hasMoved()) {
-            System.out.println("Conditions bases non remplies");
             return false;
         }
 
@@ -35,7 +35,6 @@ public class CastlingRule extends Rule {
         while (v.substract(piece.getPosition()).squareNorm() < secondPiecePosition.squareNorm()) {
             if (board.hasPieceAt(v) 
             || (board.isAttacked(v, piece.getColor()) && v.substract(piece.getPosition()).squareNorm() <= destination.squareNorm())) {
-                System.out.println("Pièce sur le chemin ou échec");
                 return false;
             }
             v = v.add(direction);
@@ -46,7 +45,10 @@ public class CastlingRule extends Rule {
 
     @Override
     public Move createMove(Vector to) {
-        // TODO Auto-generated method stub
-        return null;
+        return new CastlingMove(piece.getPosition(),
+            to, 
+            piece, 
+            board.getPieceAt(piece.getPosition().add(secondPiecePosition)),
+            to.substract(direction));
     }
 }

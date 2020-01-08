@@ -1,10 +1,9 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Direction;
-import engine.Move;
-import engine.Vector;
 import engine.piece.Piece;
+import engine.util.Direction;
+import engine.util.Vector;
 
 /**
  * Implémente un déplacement double, comme celui d'un pion.
@@ -26,10 +25,5 @@ public class DoubleForwardRule extends OneWayRule {
             && !board.hasPieceAt(to)
             && piece.getPosition().add(direction, 2).equals(to)
             && !board.hasPieceAt(piece.getPosition().add(direction));
-    }
-
-    @Override
-    public Move createMove(Vector to) {
-        return new Move(piece.getPosition(), to, piece);
     }
 }

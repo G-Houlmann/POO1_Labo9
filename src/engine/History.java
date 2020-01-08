@@ -2,6 +2,8 @@ package engine;
 
 import java.util.LinkedList;
 
+import engine.move.Move;
+
 public class History {
     private LinkedList<Move> moves;
 
@@ -20,8 +22,9 @@ public class History {
      * Ajoute un mouvement à l'historique
      * @param m Un mouvement
      */
-    public void add(Move m) {
+    public History add(Move m) {
         moves.add(m);
+        return this;
     }
 
     /**

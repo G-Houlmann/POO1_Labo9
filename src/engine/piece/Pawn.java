@@ -3,13 +3,13 @@ package engine.piece;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
-import engine.Direction;
-import engine.Vector;
 import engine.rule.DiagonalTakenRule;
 import engine.rule.DoubleForwardRule;
 import engine.rule.EnPassantRule;
 import engine.rule.ForwardRule;
 import engine.rule.Rule;
+import engine.util.Direction;
+import engine.util.Vector;
 
 public class Pawn extends Piece {
     public Pawn(Board board, PlayerColor color, Vector position, Direction direction) {

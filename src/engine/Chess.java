@@ -5,6 +5,7 @@ import chess.ChessController;
 import chess.ChessView;
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.move.Move;
 import engine.piece.Bishop;
 import engine.piece.King;
 import engine.piece.Knight;
@@ -12,6 +13,8 @@ import engine.piece.Pawn;
 import engine.piece.Piece;
 import engine.piece.Queen;
 import engine.piece.Rook;
+import engine.util.Direction;
+import engine.util.Vector;
 
 public class Chess implements ChessController {
     private final int GRID_SIZE = 8; //TODO globalisation
@@ -99,7 +102,6 @@ public class Chess implements ChessController {
         this.view = view;
         newGame();
     }
-
     
     /** 
      * Exécute, s'il est légal, un mouvement d'une case à une autre sur le plateau affiché 
@@ -114,13 +116,17 @@ public class Chess implements ChessController {
         // TODO Auto-generated method stub
         Vector from = new Vector(fromX, fromY);
         Vector to = new Vector(toX, toY);
+
+        if (!board.hasPieceAt(from)) {
+            return false;
+        }
+
         Piece p = board.getPieceAt(from);
         Move mv = p.createMove(to);
 
         if(mv.isLegal()){
-            mv.apply(board.getTurn());
-            view.removePiece(fromX, fromY);
-            view.putPiece(mv.getPiece().getPieceType(), mv.getPiece().getColor(), toX, toY);
+            mv.apply();
+            board.addToHistory(mv);
             board.nextTurn();
             return true;
         }

@@ -1,10 +1,10 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Direction;
-import engine.Move;
-import engine.Vector;
+import engine.move.Move;
 import engine.piece.Piece;
+import engine.util.Direction;
+import engine.util.Vector;
 
 public class EnPassantRule extends OneWayRule {
     public EnPassantRule(Piece piece, Board board, Direction direction) {
@@ -18,17 +18,18 @@ public class EnPassantRule extends OneWayRule {
      * @return true/false
      */
     private boolean checkEnPassantOnPiece(Vector position) {
-        Piece p = board.getPieceAt(position);
-        return p.canBeTakenEnPassant()
-            && p.getColor() != piece.getColor()
-            && p.getFirstMoveTurn() == board.getTurn() - 1
-            && position.add(direction.getDirectionVector().multiply(2))
-                .equals(board.getHistory().getLast().getFrom());
+        return false;
+        // Piece p = board.getPieceAt(position);
+        // return p.canBeTakenEnPassant()
+        //     && p.getColor() != piece.getColor()
+        //     && p.getFirstMoveTurn() == board.getTurn() - 1
+        //     && position.add(direction.getDirectionVector().multiply(2))
+        //         .equals(board.getHistory().getLast().getFrom());
     }
 
     @Override
     public boolean check(Vector to) {
-        Vector backSquare = to.add(direction.getDirectionVector().multiply(-1));
+        Vector backSquare = to.substract(direction);
 
         return board.hasPieceAt(backSquare)
             && checkEnPassantOnPiece(backSquare);
@@ -36,6 +37,6 @@ public class EnPassantRule extends OneWayRule {
 
     @Override
     public Move createMove(Vector to) {
-        return new Move(piece.getPosition(), to, piece);
+        return new Move(piece.getPosition(), to, piece, board.getPieceAt(to.substract(direction)));
     }
 }

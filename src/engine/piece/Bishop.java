@@ -3,9 +3,9 @@ package engine.piece;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
-import engine.Vector;
 import engine.rule.LinearRule;
 import engine.rule.Rule;
+import engine.util.Vector;
 
 public class Bishop extends Piece {
     public Bishop(Board board, PlayerColor color, Vector position) {

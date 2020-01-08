@@ -3,9 +3,9 @@ package engine.piece;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
-import engine.Vector;
 import engine.rule.LinearRule;
 import engine.rule.Rule;
+import engine.util.Vector;
 
 public class Queen extends Piece {
     public Queen(Board board, PlayerColor color, Vector position) {

@@ -1,10 +1,9 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Direction;
-import engine.Move;
-import engine.Vector;
 import engine.piece.Piece;
+import engine.util.Direction;
+import engine.util.Vector;
 
 /**
  * Symbolise une prise en diagonale de distance 1, comme
@@ -35,10 +34,5 @@ public class DiagonalTakenRule extends OneWayRule {
         return board.hasPieceAt(to)
             && board.getPieceAt(to).getColor() != piece.getColor()
             && checkPosition(to);
-    }
-
-    @Override
-    public Move createMove(Vector to) {
-        return new Move(piece.getPosition(), to, piece);
     }
 }

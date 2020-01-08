@@ -1,8 +1,8 @@
 package engine.rule;
 
 import engine.Board;
-import engine.Direction;
 import engine.piece.Piece;
+import engine.util.Direction;
 
 /**
  * Représente les mouvements restreints à une direction,
