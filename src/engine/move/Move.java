@@ -71,7 +71,7 @@ public class Move {
 
     
     /** 
-     * @return Le mouvement inverse au présent mouvement
+     * Applique l'inverse du mouvement pour l'annuler
      */
     public void reverse(){
         piece.move(from);
