@@ -14,6 +14,10 @@ public class PromotionMove extends Move {
         super(from, to, piece);
     }
 
+    public PromotionMove(Vector from, Vector to, Piece piece, Piece taken) {
+        super(from, to, piece, taken);
+    }
+
     @Override
     public void apply(ChessView view) {
         Piece p = null;

@@ -15,6 +15,7 @@ import engine.util.Vector;
  */
 public class DiagonalTakenRule extends DiagonalRule {
     private int promotionYValue;
+
     public DiagonalTakenRule(Piece piece, Board board, Direction direction, int promotionYValue) {
         super(piece, board, direction);
         this.promotionYValue = promotionYValue;
@@ -29,8 +30,8 @@ public class DiagonalTakenRule extends DiagonalRule {
 
     @Override
     public Move createMove(Vector to) {
-        if (piece.getPosition().getY() == promotionYValue) {
-            return new PromotionMove(piece.getPosition(), to, piece);
+        if (to.getY() == promotionYValue) {
+            return new PromotionMove(piece.getPosition(), to, piece, board.getPieceAt(to));
         } else {
             return super.createMove(to);
         }
