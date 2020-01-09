@@ -9,10 +9,17 @@ import engine.util.Direction;
  * comme ceux des pions
  */
 public abstract class OneWayRule extends Rule {
-    protected Direction direction;
+    private Direction direction;
 
     OneWayRule(Piece piece, Board board, Direction direction) {
         super(piece, board);
         this.direction = direction;
+    }
+
+    /**
+     * @return La direction
+     */
+    Direction getDirection() {
+        return direction;
     }
 }

@@ -6,8 +6,8 @@ import engine.piece.Piece;
 import engine.util.Vector;
 
 public abstract class Rule {
-    Piece piece;
-    Board board;
+    private Piece piece;
+    private Board board;
 
     public Rule(Piece piece, Board board) {
         this.piece = piece;
@@ -34,4 +34,18 @@ public abstract class Rule {
         else
             return new Move(piece.getPosition(), to, piece);
     }
-}
+
+    /**
+     * @return Retourne sur lequel se trouve la pièce
+     */
+    Board getBoard() {
+        return board;
+    }
+
+    /**
+     * @return Retourne la pièce sur laquelle appliquer la règle
+     */
+    public Piece getPiece() {
+        return piece;
+    }
+}   

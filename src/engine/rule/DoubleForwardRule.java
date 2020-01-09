@@ -21,9 +21,9 @@ public class DoubleForwardRule extends OneWayRule {
 
     @Override
     public boolean check(Vector to) {
-        return !piece.hasMoved()
-            && !board.hasPieceAt(to)
-            && piece.getPosition().add(direction, 2).equals(to)
-            && !board.hasPieceAt(piece.getPosition().add(direction));
+        return !getPiece().hasMoved()
+            && !getBoard().hasPieceAt(to)
+            && getPiece().getPosition().add(getDirection(), 2).equals(to)
+            && !getBoard().hasPieceAt(getPiece().getPosition().add(getDirection()));
     }
 }

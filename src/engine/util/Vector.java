@@ -104,4 +104,8 @@ public class Vector {
             && this.x == ((Vector) that).x
             && this.y == ((Vector) that).y;
     }
+
+    public Vector inverser() {
+        return new Vector(y, x);
+    }
 }

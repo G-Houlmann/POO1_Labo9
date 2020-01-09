@@ -1,8 +1,6 @@
 package engine.rule;
 
 import engine.Board;
-import engine.move.Move;
-import engine.move.PromotionMove;
 import engine.piece.Piece;
 import engine.util.Direction;
 import engine.util.Vector;
@@ -13,27 +11,16 @@ import engine.util.Vector;
  * 
  * Le mouvement doit s'effectuer dans une direction donnée.
  */
-public class DiagonalTakenRule extends DiagonalRule {
-    private int promotionYValue;
+public class DiagonalTakenRule extends PromotionRule implements DiagonalRule {
 
-    public DiagonalTakenRule(Piece piece, Board board, Direction direction, int promotionYValue) {
-        super(piece, board, direction);
-        this.promotionYValue = promotionYValue;
+    public DiagonalTakenRule(Piece piece, Board board, Direction direction, Vector promotionLinePosition) {
+        super(piece, board, direction, promotionLinePosition);
     }
 
     @Override
     public boolean check(Vector to) {
-        return board.hasPieceAt(to)
-            && board.getPieceAt(to).getColor() != piece.getColor()
-            && checkPosition(to);
-    }
-
-    @Override
-    public Move createMove(Vector to) {
-        if (to.getY() == promotionYValue) {
-            return new PromotionMove(piece.getPosition(), to, piece, board.getPieceAt(to));
-        } else {
-            return super.createMove(to);
-        }
+        return getBoard().hasPieceAt(to)
+            && getBoard().getPieceAt(to).getColor() != getPiece().getColor()
+            && checkPosition(getPiece().getPosition(), to, getDirection());
     }
 }

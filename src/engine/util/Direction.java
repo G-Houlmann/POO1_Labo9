@@ -32,4 +32,21 @@ public enum Direction {
     public Vector getNormalVector() {
         return v.getNormalVector();
     }
+
+    /**
+     * @return La direction opposée
+     */
+    public Direction opposite() {
+        switch(this) {
+            case UP:
+                return DOWN;
+            case DOWN:
+                return UP;
+            case LEFT:
+                return RIGHT;
+            case RIGHT:
+            default:
+                return LEFT;
+        }
+    }
 }

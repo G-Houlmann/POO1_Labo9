@@ -13,13 +13,13 @@ import engine.util.Vector;
 
 public class Pawn extends Piece {
 
-    public Pawn(Board board, PlayerColor color, Vector position, Direction direction, int promotionYValue) {
+    public Pawn(Board board, PlayerColor color, Vector position, Direction direction, Vector promotionLinePosition) {
         super(board, color, position);
         rules = new Rule[] {
-            new ForwardRule(this, board, direction, promotionYValue),
+            new ForwardRule(this, board, direction, promotionLinePosition),
             new DoubleForwardRule(this, board, direction),
             new EnPassantRule(this, board, direction),
-            new DiagonalTakenRule(this, board, direction, promotionYValue)};
+            new DiagonalTakenRule(this, board, direction, promotionLinePosition)};
     }
 
     @Override

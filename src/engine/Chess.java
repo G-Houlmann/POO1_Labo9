@@ -17,13 +17,13 @@ import engine.util.Direction;
 import engine.util.Vector;
 
 public class Chess implements ChessController {
-    private final int GRID_SIZE = 8; //TODO globalisation
-    private final int ROOK_DIST = 0;
-    private final int KNIGHT_DIST = 1;
-    private final int BISHOP_DIST = 2;
-    private final int QUEEN_DIST = 3;
-    private final int KING_DIST = 4;
-    private final int PAWN_HEIGHT = 1;
+    private static final int GRID_SIZE = 8;
+    private static final int ROOK_DIST = 0;
+    private static final int KNIGHT_DIST = 1;
+    private static final int BISHOP_DIST = 2;
+    private static final int QUEEN_DIST = 3;
+    private static final int KING_DIST = 4;
+    private static final int PAWN_HEIGHT = 1;
 
     private ChessView view;
     private Board board;
@@ -105,12 +105,12 @@ public class Chess implements ChessController {
      * @param piecesRow Ligne sur laquelle seront placées les autres pièces
      * @param direction Direction dans laquelle les pions du joueur pourront avancer
      */
-    private void putSet(PlayerColor color, int pawnsRow, int piecesRow, Direction direction, int promotionRow){
+    private void putSet(PlayerColor color, int pawnsRow, int piecesRow, Direction direction, Vector promotionLinePosition){
 
         //crée les pions
         for(int i = 0; i < GRID_SIZE; ++i){
             view.putPiece(PieceType.PAWN, color, i, pawnsRow);
-            board.addPiece(new Pawn(board, color, new Vector(i, pawnsRow), direction, promotionRow));
+            board.addPiece(new Pawn(board, color, new Vector(i, pawnsRow), direction, promotionLinePosition));
         }
 
         //crée les tours
@@ -138,7 +138,7 @@ public class Chess implements ChessController {
 
         //crée le roi
         view.putPiece(PieceType.KING, color, KING_DIST, piecesRow);
-        board.addPiece(new King(board, color, new Vector(KING_DIST, piecesRow)));
+        board.addPiece(new King(board, color, new Vector(KING_DIST, piecesRow), Direction.RIGHT));
     }
 
     
@@ -148,7 +148,7 @@ public class Chess implements ChessController {
      */
     private void fillBoard(ChessView view){
         board = new Board();
-        putSet(PlayerColor.WHITE, PAWN_HEIGHT, 0, Direction.UP, GRID_SIZE - 1);
-        putSet(PlayerColor.BLACK, GRID_SIZE - 1 - PAWN_HEIGHT, GRID_SIZE-1, Direction.DOWN, 0);
+        putSet(PlayerColor.WHITE, PAWN_HEIGHT, 0, Direction.UP, new Vector(0, GRID_SIZE - 1));
+        putSet(PlayerColor.BLACK, GRID_SIZE - 1 - PAWN_HEIGHT, GRID_SIZE-1, Direction.DOWN, new Vector(0,0));
     }
 }

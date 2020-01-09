@@ -1,23 +1,22 @@
 package engine.rule;
 
-import engine.Board;
-import engine.piece.Piece;
 import engine.util.Direction;
 import engine.util.Vector;
 
-public abstract class DiagonalRule extends OneWayRule {
-    public DiagonalRule(Piece piece, Board board, Direction direction) {
-        super(piece, board, direction);
-    }
+interface DiagonalRule  {
 
     /**
-     * Vérifie que la position de destination est accessible
-     * @param to Un vecteur
+     * Vérifie que la position de destination est accessible par un déplacement
+     * en diagonal d'une seul case et faisant avancer la pièce d'une case
+     * dans la direction donnée.
+     * @param from Position de départ de la pièce
+     * @param to Position d'arrivée de la pièce
+     * @param direction Direction de déplacement de la pièce
      * @return true/false
      */
-    protected boolean checkPosition(Vector to) {
+    default boolean checkPosition(Vector from, Vector to, Direction direction) {
         Vector normal = direction.getNormalVector();
-        Vector base = piece.getPosition().add(direction);
+        Vector base = from.add(direction);
 
         return base.add(normal).equals(to)
             || base.substract(normal).equals(to);

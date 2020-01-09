@@ -21,7 +21,7 @@ public class CastlingRule extends Rule {
     @Override
     public boolean check(Vector to) {
         Vector destination = direction.getDirectionVector().multiply(2);
-        Vector absoluteSecondPiecePosition = piece.getPosition().add(secondPiecePosition);
+        Vector absoluteSecondPiecePosition = getPiece().getPosition().add(secondPiecePosition);
         
         /* Conditions de base :
          * - La case sur laquelle souhaite se rendre la pièce est bien une case où l'on peut roquer
@@ -30,19 +30,19 @@ public class CastlingRule extends Rule {
          * - Cette pièce est utilisable pour roquer
          * - Cette pièce n'a pas encore bougé
          */
-        if (!destination.equals(to.substract(piece.getPosition()))
-        || piece.hasMoved()
-        || !board.hasPieceAt(absoluteSecondPiecePosition)
-        || !board.getPieceAt(absoluteSecondPiecePosition).canBeUsedtoCastle()
-        || board.getPieceAt(absoluteSecondPiecePosition).hasMoved()) {
+        if (!destination.equals(to.substract(getPiece().getPosition()))
+        || getPiece().hasMoved()
+        || !getBoard().hasPieceAt(absoluteSecondPiecePosition)
+        || !getBoard().getPieceAt(absoluteSecondPiecePosition).canBeUsedtoCastle()
+        || getBoard().getPieceAt(absoluteSecondPiecePosition).hasMoved()) {
             return false;
         }
 
         // Vérifie que les cases sur le trajet sont vide et non attaquées
-        Vector v = piece.getPosition().add(direction);
-        while (v.substract(piece.getPosition()).squareNorm() < secondPiecePosition.squareNorm()) {
-            if (board.hasPieceAt(v) 
-            || (board.isAttacked(v, piece.getColor()) && v.substract(piece.getPosition()).squareNorm() <= destination.squareNorm())) {
+        Vector v = getPiece().getPosition().add(direction);
+        while (v.substract(getPiece().getPosition()).squareNorm() < secondPiecePosition.squareNorm()) {
+            if (getBoard().hasPieceAt(v) 
+            || (getBoard().isAttacked(v, getPiece().getColor()) && v.substract(getPiece().getPosition()).squareNorm() <= destination.squareNorm())) {
                 return false;
             }
             v = v.add(direction);
@@ -53,10 +53,10 @@ public class CastlingRule extends Rule {
 
     @Override
     public Move createMove(Vector to) {
-        return new CastlingMove(piece.getPosition(),
+        return new CastlingMove(getPiece().getPosition(),
             to, 
-            piece, 
-            board.getPieceAt(piece.getPosition().add(secondPiecePosition)),
+            getPiece(), 
+            getBoard().getPieceAt(getPiece().getPosition().add(secondPiecePosition)),
             to.substract(direction));
     }
 }

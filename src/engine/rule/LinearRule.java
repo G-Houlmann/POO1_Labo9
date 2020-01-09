@@ -32,7 +32,7 @@ public class LinearRule extends Rule {
      */
     private int computeDistance(Vector to) {
         double distance = 0;
-        Vector fromTo = to.substract(piece.getPosition());
+        Vector fromTo = to.substract(getPiece().getPosition());
 
         if (direction.isCollinear(fromTo)) {
             if (direction.getX() == 0) {
@@ -57,12 +57,12 @@ public class LinearRule extends Rule {
         }
         
         for (int i = 1; i <= distance; ++i) {
-            Vector position = piece.getPosition().add(direction.multiply(i * sign));
+            Vector position = getPiece().getPosition().add(direction.multiply(i * sign));
             // Si une case sur le chemin est occupée
             // ou si la case de destination est occupée par une pièce de même couleur
-            if ((i < distance && board.hasPieceAt(position))
-            || (board.hasPieceAt(position) && 
-            board.getPieceAt(position).getColor() == piece.getColor())) {
+            if ((i < distance && getBoard().hasPieceAt(position))
+            || (getBoard().hasPieceAt(position) && 
+            getBoard().getPieceAt(position).getColor() == getPiece().getColor())) {
                 return false;
             }
         }
