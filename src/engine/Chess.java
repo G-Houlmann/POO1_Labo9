@@ -46,8 +46,8 @@ public class Chess implements ChessController {
      */
     @Override
     public void start(ChessView view) {
-        view.startView();
         this.view = view;
+        view.startView();
         newGame();
     }
     
@@ -71,9 +71,9 @@ public class Chess implements ChessController {
         Piece p = board.getPieceAt(from);
         Move mv = p.createMove(to);
 
-        if(mv.isValid() && mv.getPiece().getColor() == currentPlayer){
+        if(mv.isValid() && p.getColor() == currentPlayer){
             mv.apply();
-            if(board.isCheck(mv.getPiece().getColor())){//Le mouvement doit être annulé
+            if(board.isCheck(p.getColor())){//Le mouvement doit être annulé
                 mv.reverse();
                 displayCheck();
             } else{

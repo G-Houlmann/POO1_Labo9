@@ -33,7 +33,7 @@ public class Move {
     /** 
      * @return La pièce concernée par le mouvement
      */
-    public Piece getPiece(){
+    Piece getPiece(){
         return piece;
     }
 
@@ -49,15 +49,6 @@ public class Move {
      */
     public Vector getTo() {
         return to;
-    }
-    
-    /** 
-     * @return True si le mouvement est légal, c'est-à-dire qu'il est 
-     *          valide (la case visée est atteignable) et qu'il ne cause pas 
-     *          d'échecs à sa propre couleur. False sinon.
-     */
-    public Boolean createsAllyCheck(){
-        return piece.getBoard().isCheck(piece.getColor());
     }
 
     
@@ -89,10 +80,9 @@ public class Move {
      */
     public Boolean apply(){
         if (taken.isPresent()) {
-            taken.get().removeFromBoard(); //TODO prise
+            taken.get().removeFromBoard();
         }
         piece.move(to);
-        
         return true;
     }
 

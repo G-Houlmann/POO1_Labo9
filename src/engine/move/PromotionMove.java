@@ -1,6 +1,8 @@
 package engine.move;
 
 import chess.ChessView;
+import chess.PlayerColor;
+import engine.Board;
 import engine.piece.Bishop;
 import engine.piece.Knight;
 import engine.piece.Piece;
@@ -21,15 +23,17 @@ public class PromotionMove extends Move {
     @Override
     public void apply(ChessView view) {
         Piece p = null;
+        Board b = getPiece().getBoard();
+        PlayerColor color = getPiece().getColor();
         while(p == null)
             p = view.askUser("Promotion !", "Choose a new piece:",
-                (Piece) new Knight(getPiece().getBoard(), getPiece().getColor(), getTo()),
-                (Piece) new Rook(getPiece().getBoard(), getPiece().getColor(), getTo()),
-                (Piece) new Bishop(getPiece().getBoard(), getPiece().getColor(), getTo()),
-                (Piece) new Queen(getPiece().getBoard(), getPiece().getColor(), getTo()));
-        p.getBoard().removePiece(getPiece());
-        p.getBoard().addPiece(p);
+                (Piece) new Knight(b, color, getTo()),
+                (Piece) new Rook(b, color, getTo()),
+                (Piece) new Bishop(b, color, getTo()),
+                (Piece) new Queen(b, color, getTo()));
+        b.removePiece(getPiece());
+        b.addPiece(p);
         view.removePiece(getFrom().getX(), getFrom().getY());
-        view.putPiece(p.getPieceType(), p.getColor(), getTo().getX(), getTo().getY());
+        view.putPiece(p.getPieceType(), color, getTo().getX(), getTo().getY());
     }
 }
