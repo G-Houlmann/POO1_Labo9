@@ -30,6 +30,9 @@ public class Chess implements ChessController {
     
     private PlayerColor currentPlayer;
 
+    /**
+     * Démarre une nouvelle partie
+     */
     @Override
     public void newGame() {
         fillBoard(view);
@@ -43,8 +46,8 @@ public class Chess implements ChessController {
      */
     @Override
     public void start(ChessView view) {
-        view.startView();
         this.view = view;
+        view.startView();
         newGame();
     }
     
@@ -68,29 +71,37 @@ public class Chess implements ChessController {
         Piece p = board.getPieceAt(from);
         Move mv = p.createMove(to);
 
-        if(mv.isValid() && mv.getPiece().getColor() == currentPlayer){
+        if(mv.isValid() && p.getColor() == currentPlayer){
             mv.apply();
-            if(board.isCheck(mv.getPiece().getColor())){//Le mouvement doit être annulé
+            if(board.isCheck(p.getColor())){//Le mouvement doit être annulé
                 mv.reverse();
+                displayCheck();
             } else{
+                
                 nextTurn();
                 board.addToHistory(mv);
                 mv.apply(view);
-                displayCheck(mv.getPiece().getColor());
+                displayCheck();
+                
                 return true;
             }
         }
-
+        
         return false;
     }
 
-    private void displayCheck(PlayerColor color) {
-        color = color == PlayerColor.BLACK ? PlayerColor.WHITE : PlayerColor.BLACK;
-        if (board.isCheck(color)) {
+    /**
+     * Affiche le message "Check!" si le joueur actuel est en échec
+     */
+    private void displayCheck() {
+        if (board.isCheck(currentPlayer)) {
             view.displayMessage("Check!");
         }
     }
 
+    /**
+     * Passe au tour de jeu suivant
+     */
     private void nextTurn(){
         board.nextTurn();
         currentPlayer = currentPlayer == 
