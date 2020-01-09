@@ -1,6 +1,6 @@
 package engine.rule;
 
-import engine.Board;
+import engine.core.Board;
 import engine.piece.Piece;
 import engine.util.Vector;
 
@@ -57,12 +57,13 @@ public class LinearRule extends Rule {
         }
         
         for (int i = 1; i <= distance; ++i) {
-            Vector position = getPiece().getPosition().add(direction.multiply(i * sign));
+            Vector position = getPiece().getPosition()
+                              .add(direction.multiply(i * sign));
             // Si une case sur le chemin est occupée
-            // ou si la case de destination est occupée par une pièce de même couleur
+            //ou si la case de destination est occupée par une pièce de même couleur
             if ((i < distance && getBoard().hasPieceAt(position))
             || (getBoard().hasPieceAt(position) && 
-            getBoard().getPieceAt(position).getColor() == getPiece().getColor())) {
+            getBoard().getPieceAt(position).getColor() == getPiece().getColor())){
                 return false;
             }
         }

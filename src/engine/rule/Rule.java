@@ -1,6 +1,6 @@
 package engine.rule;
 
-import engine.Board;
+import engine.core.Board;
 import engine.move.Move;
 import engine.piece.Piece;
 import engine.util.Vector;

@@ -1,6 +1,6 @@
 package engine.rule;
 
-import engine.Board;
+import engine.core.Board;
 import engine.piece.Piece;
 import engine.util.Direction;
 import engine.util.Vector;
@@ -22,8 +22,8 @@ public class DoubleForwardRule extends OneWayRule {
     @Override
     public boolean check(Vector to) {
         return !getPiece().hasMoved()
-            && !getBoard().hasPieceAt(to)
-            && getPiece().getPosition().add(getDirection(), 2).equals(to)
-            && !getBoard().hasPieceAt(getPiece().getPosition().add(getDirection()));
+          && !getBoard().hasPieceAt(to)
+          && getPiece().getPosition().add(getDirection(), 2).equals(to)
+          && !getBoard().hasPieceAt(getPiece().getPosition().add(getDirection()));
     }
 }

@@ -1,6 +1,6 @@
 package engine.rule;
 
-import engine.Board;
+import engine.core.Board;
 import engine.move.Move;
 import engine.piece.Piece;
 import engine.util.Direction;
@@ -38,6 +38,7 @@ public class EnPassantRule extends OneWayRule implements DiagonalRule {
 
     @Override
     public Move createMove(Vector to) {
-        return new Move(getPiece().getPosition(), to, getPiece(), getBoard().getPieceAt(to.substract(getDirection())));
+        return new Move(getPiece().getPosition(), to, getPiece(), getBoard()
+                   .getPieceAt(to.substract(getDirection())));
     }
 }

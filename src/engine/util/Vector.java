@@ -10,14 +10,14 @@ public class Vector {
     }
 
     /**
-     * @return x
+     * @return La composante x
      */
     public int getX() {
         return x;
     }
 
     /**
-     * @return y
+     * @return La composante y
      */
     public int getY() {
         return y;
