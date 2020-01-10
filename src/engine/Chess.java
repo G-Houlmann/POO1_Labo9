@@ -89,7 +89,7 @@ public class Chess implements ChessController {
                 return true;
             }
         }
-        
+        displayCheck();
         return false;
     }
 
