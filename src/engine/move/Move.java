@@ -20,7 +20,7 @@ public class Move {
         validity = false;
     }
 
-    public Move(Vector from, Vector to, Piece piece){
+    Move(Vector from, Vector to, Piece piece){
         this(from, to, piece, null);
     }
 
