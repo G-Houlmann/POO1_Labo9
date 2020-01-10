@@ -29,10 +29,7 @@ public abstract class Rule {
      * @return Un mouvement
      */
     public Move createMove(Vector to) {
-        if (board.hasPieceAt(to)) 
-            return new Move(piece.getPosition(), to, piece, board.getPieceAt(to));
-        else
-            return new Move(piece.getPosition(), to, piece);
+        return new Move(piece.getPosition(), to, piece, board.getPieceAt(to));
     }
 
     /**
