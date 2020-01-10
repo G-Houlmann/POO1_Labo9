@@ -1,6 +1,6 @@
 package engine.rule;
 
-import engine.Board;
+import engine.core.Board;
 import engine.move.Move;
 import engine.move.PromotionMove;
 import engine.piece.Piece;
@@ -10,7 +10,8 @@ import engine.util.Vector;
 abstract class PromotionRule extends OneWayRule {
     private Vector promotionLinePosition;
 
-    public PromotionRule(Piece piece, Board board, Direction direction, Vector promotionLinePosition) {
+    public PromotionRule(Piece piece, Board board, Direction direction, 
+                         Vector promotionLinePosition) {
         super(piece, board, direction);
         this.promotionLinePosition = promotionLinePosition;
     }

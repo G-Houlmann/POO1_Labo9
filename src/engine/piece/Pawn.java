@@ -2,7 +2,7 @@ package engine.piece;
 
 import chess.PieceType;
 import chess.PlayerColor;
-import engine.Board;
+import engine.core.Board;
 import engine.rule.DiagonalTakenRule;
 import engine.rule.DoubleForwardRule;
 import engine.rule.EnPassantRule;
@@ -13,7 +13,8 @@ import engine.util.Vector;
 
 public class Pawn extends Piece {
 
-    public Pawn(Board board, PlayerColor color, Vector position, Direction direction, Vector promotionLinePosition) {
+    public Pawn(Board board, PlayerColor color, Vector position, 
+                Direction direction, Vector promotionLinePosition) {
         super(board, color, position);
         rules = new Rule[] {
             new ForwardRule(this, board, direction, promotionLinePosition),

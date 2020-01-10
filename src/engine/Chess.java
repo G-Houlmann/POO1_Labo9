@@ -5,6 +5,7 @@ import chess.ChessController;
 import chess.ChessView;
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.core.Board;
 import engine.move.Move;
 import engine.piece.Bishop;
 import engine.piece.King;
@@ -52,12 +53,14 @@ public class Chess implements ChessController {
     }
     
     /** 
-     * Exécute, s'il est légal, un mouvement d'une case à une autre sur le plateau affiché 
+     * Exécute, s'il est légal, un mouvement d'une case à une 
+     * autre sur le plateau affiché 
      * @param fromX Coordonnée X de départ
      * @param fromY Coordonnée Y de départ
      * @param toX Coordonnée X de destination
      * @param toY Coordonnée Y de destination
-     * @return True si l'application du mouvement s'est passée sans problème, false sinon.
+     * @return True si l'application du mouvement s'est passée sans problème,
+     *         false sinon.
      */
     @Override
     public boolean move(int fromX, int fromY, int toX, int toY) {
@@ -110,38 +113,48 @@ public class Chess implements ChessController {
 
 
     /** 
-     * Remplit le plateau de jeu d'un joueur sur la vue ainsi que dans l'objet board
+     * Remplit le plateau de jeu d'un joueur sur la vue ainsi que dans l'objet 
+     * board
      * @param color Couleur des pièces du joueur
      * @param pawnsRow Ligne sur laquelle seront placés les pions du joueur
      * @param piecesRow Ligne sur laquelle seront placées les autres pièces
      * @param direction Direction dans laquelle les pions du joueur pourront avancer
      */
-    private void putSet(PlayerColor color, int pawnsRow, int piecesRow, Direction direction, Vector promotionLinePosition){
+    private void putSet(PlayerColor color, int pawnsRow, int piecesRow, 
+                        Direction direction, Vector promotionLinePosition){
 
         //crée les pions
         for(int i = 0; i < GRID_SIZE; ++i){
             view.putPiece(PieceType.PAWN, color, i, pawnsRow);
-            board.addPiece(new Pawn(board, color, new Vector(i, pawnsRow), direction, promotionLinePosition));
+            board.addPiece(new Pawn(board, color, 
+                new Vector(i, pawnsRow),direction, promotionLinePosition));
         }
 
         //crée les tours
         view.putPiece(PieceType.ROOK, color, ROOK_DIST, piecesRow);
         view.putPiece(PieceType.ROOK, color, GRID_SIZE - 1 - ROOK_DIST, piecesRow);
         board.addPiece(new Rook(board, color, new Vector(ROOK_DIST, piecesRow)));
-        board.addPiece(new Rook(board, color, new Vector(GRID_SIZE - 1 - ROOK_DIST, piecesRow)));
+        board.addPiece(new Rook(board, color, 
+            new Vector(GRID_SIZE - 1 - ROOK_DIST, piecesRow)));
         
 
         //creé les cavaliers
         view.putPiece(PieceType.KNIGHT, color, KNIGHT_DIST, piecesRow);
-        view.putPiece(PieceType.KNIGHT, color, GRID_SIZE - 1 - KNIGHT_DIST, piecesRow);
-        board.addPiece(new Knight(board, color, new Vector(KNIGHT_DIST, piecesRow)));
-        board.addPiece(new Knight(board, color, new Vector(GRID_SIZE - 1 - KNIGHT_DIST, piecesRow)));
+        view.putPiece(PieceType.KNIGHT, color, 
+            GRID_SIZE - 1 - KNIGHT_DIST, piecesRow);
+        board.addPiece(new Knight(board, color, 
+            new Vector(KNIGHT_DIST, piecesRow)));
+        board.addPiece(new Knight(board, color, 
+            new Vector(GRID_SIZE - 1 - KNIGHT_DIST, piecesRow)));
 
         //crée les fous
         view.putPiece(PieceType.BISHOP, color, BISHOP_DIST, piecesRow);
-        view.putPiece(PieceType.BISHOP, color, GRID_SIZE - 1 - BISHOP_DIST, piecesRow);
-        board.addPiece(new Bishop(board, color, new Vector(BISHOP_DIST, piecesRow)));
-        board.addPiece(new Bishop(board, color, new Vector(GRID_SIZE - 1 - BISHOP_DIST, piecesRow)));
+        view.putPiece(PieceType.BISHOP, color, 
+            GRID_SIZE - 1 - BISHOP_DIST, piecesRow);
+        board.addPiece(new Bishop(board, color, 
+            new Vector(BISHOP_DIST, piecesRow)));
+        board.addPiece(new Bishop(board, color, 
+            new Vector(GRID_SIZE - 1 - BISHOP_DIST, piecesRow)));
 
         //crée la dame
         view.putPiece(PieceType.QUEEN, color, QUEEN_DIST, piecesRow);
@@ -149,7 +162,8 @@ public class Chess implements ChessController {
 
         //crée le roi
         view.putPiece(PieceType.KING, color, KING_DIST, piecesRow);
-        board.addPiece(new King(board, color, new Vector(KING_DIST, piecesRow), Direction.RIGHT));
+        board.addPiece(new King(board, color, 
+            new Vector(KING_DIST, piecesRow), Direction.RIGHT));
     }
 
     
@@ -159,7 +173,9 @@ public class Chess implements ChessController {
      */
     private void fillBoard(ChessView view){
         board = new Board();
-        putSet(PlayerColor.WHITE, PAWN_HEIGHT, 0, Direction.UP, new Vector(0, GRID_SIZE - 1));
-        putSet(PlayerColor.BLACK, GRID_SIZE - 1 - PAWN_HEIGHT, GRID_SIZE-1, Direction.DOWN, new Vector(0,0));
+        putSet(PlayerColor.WHITE, PAWN_HEIGHT, 0, Direction.UP, 
+            new Vector(0, GRID_SIZE - 1));
+        putSet(PlayerColor.BLACK, GRID_SIZE - 1 - PAWN_HEIGHT, GRID_SIZE-1, 
+            Direction.DOWN, new Vector(0,0));
     }
 }

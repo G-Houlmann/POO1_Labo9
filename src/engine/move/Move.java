@@ -11,8 +11,11 @@ public class Move {
     private Vector to;
     private Piece piece;
     private Optional<Piece> taken;
-    private Boolean validity;
+    private boolean validity;
 
+    /**
+     * Creates an invalid move
+     */
     public Move(){
         validity = false;
     }
@@ -56,7 +59,7 @@ public class Move {
      * @return True si le mouvement est valide (la case visée est atteignable).
      *          False sinon.
      */
-    public Boolean isValid(){
+    public boolean isValid(){
         return validity;
     }
 
@@ -73,28 +76,26 @@ public class Move {
 
     
     /** 
-     * Applique le mouvement, vérifie si il crée un échec allié. Si c'est le cas,
-     * Applique le mouvement inverse pour annuler les changements.
-     * @return True si le mouvement s'est appliqué sans problème, false si il a
-     * du être annulé.
+     * Applique le mouvement sur le board.
      */
-    public Boolean apply(){
+    public void apply(){
         if (taken.isPresent()) {
             taken.get().removeFromBoard();
         }
         piece.move(to);
-        return true;
     }
 
     /**
      * Applique un mouvement à une vue
-     * @param view
+     * @param view Vue sur laquelle appliquer le mouvement
      */
     public void apply(ChessView view) {
         if (taken.isPresent()) {
-            view.removePiece(taken.get().getPosition().getX(), taken.get().getPosition().getY());
+            view.removePiece(taken.get().getPosition().getX(), 
+                             taken.get().getPosition().getY());
         }
         view.removePiece(from.getX(), from.getY());
-        view.putPiece(piece.getPieceType(), piece.getColor(), to.getX(), to.getY());
+        view.putPiece(piece.getPieceType(), piece.getColor(), 
+                      to.getX(), to.getY());
     }
 }

@@ -3,7 +3,7 @@ package engine.piece;
 import chess.ChessView;
 import chess.PieceType;
 import chess.PlayerColor;
-import engine.Board;
+import engine.core.Board;
 import engine.move.Move;
 import engine.rule.Rule;
 import engine.util.Vector;
@@ -34,8 +34,8 @@ public abstract class Piece implements ChessView.UserChoice {
     }
 
     /** 
-     * Déplace la pièce
-     * @param newPos Nouvelle position de la pièce sur le board
+     * Déplace la pièce sur le board
+     * @param newPos Nouvelle position de la pièce
      */
     public void move(Vector newPos){
         position = newPos;
@@ -108,7 +108,7 @@ public abstract class Piece implements ChessView.UserChoice {
     }
 
     /**
-     * @return true s'il est possible d'utiliser la pièce pour effectuer un roque',
+     * @return true s'il est possible d'utiliser la pièce pour effectuer un roque,
      * false sinon
      */
     public boolean canBeUsedtoCastle() {

@@ -1,6 +1,6 @@
 package engine.rule;
 
-import engine.Board;
+import engine.core.Board;
 import engine.piece.Piece;
 import engine.util.Direction;
 import engine.util.Vector;
@@ -13,7 +13,8 @@ import engine.util.Vector;
  */
 public class ForwardRule extends PromotionRule {
 
-    public ForwardRule(Piece piece, Board board, Direction direction, Vector promotionLinePosition) {
+    public ForwardRule(Piece piece, Board board, Direction direction, 
+                       Vector promotionLinePosition) {
         super(piece, board, direction, promotionLinePosition);
     }
 

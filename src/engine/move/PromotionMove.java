@@ -2,7 +2,7 @@ package engine.move;
 
 import chess.ChessView;
 import chess.PlayerColor;
-import engine.Board;
+import engine.core.Board;
 import engine.piece.Bishop;
 import engine.piece.Knight;
 import engine.piece.Piece;
@@ -31,6 +31,7 @@ public class PromotionMove extends Move {
                 (Piece) new Rook(b, color, getTo()),
                 (Piece) new Bishop(b, color, getTo()),
                 (Piece) new Queen(b, color, getTo()));
+                
         b.removePiece(getPiece());
         b.addPiece(p);
         view.removePiece(getFrom().getX(), getFrom().getY());

@@ -2,7 +2,7 @@ package engine.piece;
 
 import chess.PieceType;
 import chess.PlayerColor;
-import engine.Board;
+import engine.core.Board;
 import engine.rule.LinearRule;
 import engine.rule.Rule;
 import engine.util.Vector;
