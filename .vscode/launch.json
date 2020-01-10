@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - GUILauncher",
+            "request": "launch",
+            "mainClass": "GUILauncher",
+            "projectName": "Labo9"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ConsoleLauncher",
+            "request": "launch",
+            "mainClass": "ConsoleLauncher",
+            "projectName": "Labo9"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - launcher",
             "request": "launch",
             "mainClass": "launcher",
