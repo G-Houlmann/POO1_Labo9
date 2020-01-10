@@ -29,7 +29,8 @@ abstract class PromotionRule extends OneWayRule {
     @Override
     public Move createMove(Vector to) {
         if (isPromoted(to)) {
-            return new PromotionMove(getPiece().getPosition(), to, getPiece());
+            return new PromotionMove(getPiece().getPosition(), to, getPiece(),
+                                     getBoard().getPieceAt(to));
         } else {
             return super.createMove(to);
         }
