@@ -8,7 +8,7 @@ De même, les tests concernent systématiquement les deux couleurs.
 
 #### Légende
 
-🟢 : Mouvement possible
+🟢 : Mouvement possible  
 🔴 : Mouvement impossible
 
 
@@ -74,7 +74,7 @@ Note : Pour cette pièce, le terme "mouvement" désigne un déplacement sur une 
 |Roque avec la tour attaquée|🟢|🟢|
 |Grand roque avec la case adjacente à la tour en échec|🟢|🟢|
 
-¹Premier mouvement du roi et de la tour associé, case de destination correcte, le roi n'est pas en échec, aucune case entre le roi et la tour n'est occupée, aucune case sur le chemin du roi (destination incluse) n'est attaquée.
+¹Premier mouvement du roi et de la tour associé, case de destination correcte, le roi n'est pas en échec, aucune case entre le roi et la tour n'est occupée, aucune case sur le chemin du roi (destination incluse) n'est attaquée.  
 ²Toutes les règles du roque sont supposés respectées sauf celle explicitement mentionnée.
 
 
