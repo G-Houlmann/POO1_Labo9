@@ -33,12 +33,14 @@ public class CastlingRule extends Rule {
          *   roque
          * - Cette pièce est utilisable pour roquer
          * - Cette pièce n'a pas encore bougé
+         * - Le joueur n'est pas en échec
          */
         if (!destination.equals(to.substract(getPiece().getPosition()))
         || getPiece().hasMoved()
         || !getBoard().hasPieceAt(absoluteSecondPiecePosition)
         || !getBoard().getPieceAt(absoluteSecondPiecePosition).canBeUsedtoCastle()
-        || getBoard().getPieceAt(absoluteSecondPiecePosition).hasMoved()) {
+        || getBoard().getPieceAt(absoluteSecondPiecePosition).hasMoved()
+        || getBoard().isCheck(getPiece().getColor())) {
             return false;
         }
 
