@@ -1,18 +1,18 @@
 ### Tests
 
-###### Avant-propos
+#### Avant-propos
 
 Tous les mouvements décrits dans les tests ne mettent pas en échec le roi de la couleur du joueur actuel, sauf exceptions mentionnées.
 
 De même, les tests concernent systématiquement les deux couleurs.
 
-####### Légende
+#### Légende
 
 🟢 : Mouvement possible
 🔴 : Mouvement impossible
 
 
-####### Tests généraux
+#### Tests généraux
 
 |Description|Résultat attendu|Résultat obtenu|
 |:-|:-:|:-:|
@@ -28,7 +28,7 @@ De même, les tests concernent systématiquement les deux couleurs.
 |Il est possible de bouger une pièce lorsque son roi est en échec sans pour autant résoudre la menace|non|non| 
 
 
-####### Pion
+#### Pion
 
 Note : Pour cette pièce, le terme "mouvement" désigne un déplacement sur une case adjacente, sauf exceptions mentionnées.
 
@@ -55,7 +55,7 @@ Note : Pour cette pièce, le terme "mouvement" désigne un déplacement sur une 
 ¹La promotion n'est techniquement possible que pour ces deux déplacements, la prise en passant et le double mouvement n'étant pas supposé amener la pièce dans une zone de promotion, ils ne l'implémentent tout simplement pas.
 
 
-###### Roi
+#### Roi
 
 Note : Pour cette pièce, le terme "mouvement" désigne un déplacement sur une case adjacente dans n'importe quelle direction, sauf exceptions mentionnées.
 
@@ -78,7 +78,7 @@ Note : Pour cette pièce, le terme "mouvement" désigne un déplacement sur une 
 ²Toutes les règles du roque sont supposés respectées sauf celle explicitement mentionnée.
 
 
-###### Reine
+#### Reine
 
 Note : Pour cette pièce, le terme "mouvement" désigne un déplacement rectiligne d'une ou plusieurs cases dans n'importe quelle direction, sauf exceptions mentionnées.
 
@@ -91,7 +91,7 @@ Note : Pour cette pièce, le terme "mouvement" désigne un déplacement rectilig
 |Mouvement non rectiligne|🔴|🔴|
 
 
-###### Fou
+#### Fou
 
 Note : Pour cette pièce, le terme "mouvement" désigne un déplacement rectiligne d'une ou plusieurs cases en diagonal, sauf exceptions mentionnées.
 
@@ -105,7 +105,7 @@ Note : Pour cette pièce, le terme "mouvement" désigne un déplacement rectilig
 |Mouvement suivant les axes|🔴|🔴|
 
 
-###### Tour
+#### Tour
 
 Note : Pour cette pièce, le terme "mouvement" désigne un déplacement rectiligne suivant les axes d'une ou plusieurs cases, sauf exceptions mentionnées.
 
@@ -118,7 +118,7 @@ Note : Pour cette pièce, le terme "mouvement" désigne un déplacement rectilig
 |Mouvement non rectiligne|🔴|🔴|
 |Mouvement en diagonal|🔴|🔴|
 
-###### Cavalier
+#### Cavalier
 
 Note : Pour cette pièce, le terme "mouvement" désigne un "saut en L", sauf exceptions mentionnées.
 
