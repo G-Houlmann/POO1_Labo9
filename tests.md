@@ -25,7 +25,8 @@ De même, les tests concernent systématiquement les deux couleurs.
 |Il est possible de découvrir son roi en bougeant une pièce|non|non|
 |Il est possible de bouger une pièce qui couvre son roi lorsque celui-ci est en échec|oui|oui|
 |Il est possible prendre une pièce qui met son roi en échec, si cela résout la menace et n'en crée pas de nouvelle|oui|oui|
-|Il est possible de bouger une pièce lorsque son roi est en échec sans pour autant résoudre la menace|non|non| 
+|Il est possible de bouger une pièce lorsque son roi est en échec sans pour autant résoudre la menace|non|non|
+|Il est possible de ne pas promouvoir une pièce|non|non|
 
 
 #### Pion
