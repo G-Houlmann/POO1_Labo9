@@ -3,7 +3,11 @@ package engine.rule;
 import engine.core.Board;
 import engine.move.Move;
 import engine.move.PromotionMove;
+import engine.piece.Bishop;
+import engine.piece.Knight;
 import engine.piece.Piece;
+import engine.piece.Queen;
+import engine.piece.Rook;
 import engine.util.Direction;
 import engine.util.Vector;
 
@@ -30,6 +34,12 @@ abstract class PromotionRule extends OneWayRule {
     public Move createMove(Vector to) {
         if (isPromoted(to)) {
             return new PromotionMove(getPiece().getPosition(), to, getPiece(),
+                                     new Piece[]{
+                                        new Knight(getBoard(), getPiece().getColor(), to),
+                                        new Rook(getBoard(), getPiece().getColor(), to),
+                                        new Bishop(getBoard(), getPiece().getColor(), to),
+                                        new Queen(getBoard(), getPiece().getColor(), to)
+                                     },
                                      getBoard().getPieceAt(to));
         } else {
             return super.createMove(to);
